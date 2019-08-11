@@ -1,0 +1,15 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+
+COPY ./package.json ./
+
+RUN npm install
+
+COPY ./public ./public
+COPY ./src ./src
+
+COPY ./README.md ./
+COPY ./.env ./
+
+CMD ["npm","start"]

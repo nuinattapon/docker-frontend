@@ -1,0 +1,43 @@
+version: "3"
+services:
+  frontend:
+    container_name: udemy_frontend
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: udemy/frontend
+    ports:
+      - 3000:3000
+    volumes:
+      - /app/node_modules
+      - .:/app
+    depends_on:
+      - mongo
+
+  tests:
+    container_name: udemy_frontend_test
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: udemy/frontend
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
+    depends_on:
+      - mongo
+
+  mongo-express:
+    container_name: udemy_mongo_express
+    image: mongo-express:latest
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: udemy_mongo
+    image: mongo:latest
+    ports:
+      - 27017:27017
