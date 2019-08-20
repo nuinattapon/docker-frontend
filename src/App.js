@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Hello from React App - Here is a change in feature branch
+          Hello from React App
         </a>
       </header>
     </div>
