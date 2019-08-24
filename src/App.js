@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Hello from React App
+          I love Travis-CI
         </a>
       </header>
     </div>
