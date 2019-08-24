@@ -3,14 +3,15 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker build -f Dockerfile.dev -t nuinattapon/docker-frontend .
+  - docker build -f Dockerfile.dev -t "$DOCKER_USERNAME"/docker-frontend .
 script:
-  - docker run -e CI=true nuinattapon/docker-frontend npm run test
+  - docker run -e CI=true "$DOCKER_USERNAME"/docker-frontend npm run test
 before_deploy:
-  - docker build -f Dockerfile -t nuinattapon/docker-frontend .
+  - docker build -f Dockerfile -t "$DOCKER_USERNAME"/docker-frontend .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push "$DOCKER_USERNAME"/docker-frontend
 deploy:
   provider: script
-  script: docker push nuinattapon/docker-frontend
+  script: docker push "$DOCKER_USERNAME"/docker-frontend
   on:
     branch: master
