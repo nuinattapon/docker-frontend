@@ -7,7 +7,7 @@ before_install:
 script:
   - docker run -e CI=true nuinattapon/docker-frontend npm run test
 before_deploy:
-  - echo "$DOCKER_USERNAME"
+  - docker build -f Dockerfile -t nuinattapon/docker-frontend .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 deploy:
   provider: script
