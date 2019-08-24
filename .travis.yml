@@ -9,7 +9,6 @@ script:
 before_deploy:
   - docker build -f Dockerfile -t "$DOCKER_USERNAME"/docker-frontend .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push "$DOCKER_USERNAME"/docker-frontend
 deploy:
   provider: script
   script: docker push "$DOCKER_USERNAME"/docker-frontend
